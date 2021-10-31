@@ -35,7 +35,7 @@ Der böse Professor Dummbaba hat ein Igel-Plüschtier entführt, weil er nicht z
 
 - Der Igel befindet sich im Keller. Man muss zuerst den Schlüssel finden, um aus dem Raum zu kommen.
 - Die Suche hat zudem einen Alarm ausgelöst, den man deaktivieren muss. Durch ein Zeitlimit von 20 Minuten bekommt das eine neue Dynamik. 
-- Die Teilnehmer:innen finden einen Ausdruck des Rätsels auf zwei A4 Seiten.
+- Die Teilnehmer:innen finden einen Ausdruck des Rätsels auf zwei A4 Seiten (escaperoom.pdf).
 - Dadurch dass man zwei parallele Stränge hat, können sich die Teilnehmer:innen in zwei Gruppen aufteilen.
 - Eine Gruppe muss den Alarm deaktivieren, dafür benötigt man ein Passwort. Das Passwort ist die Anzahl der Tage, die das Geburtstagskind an diesem Tag alt ist. Also eine Rechenaufgabe.
 - Die zweite Gruppe findet einen Hinweis auf den Ort: Es ist ein Wort auf einer bestimmten Seite in einem bestimmten Buch (Hinweis: Bild des Buchs). Also zuerst ein Suchrätsel
