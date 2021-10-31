@@ -1,0 +1,657 @@
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sumana&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="timer.css" crossorigin>
+    <style>
+        .step, .step button, .step input {
+            font-size: xx-large;
+            font-family: 'Sumana', serif;
+        }
+
+        .step {
+            width: 100%;
+            line-height: 48pt;
+        }
+
+        .step button {
+            padding: 10pt;
+            margin: 10pt;
+        }
+
+        .step input {
+            padding: 10pt;
+            font-size: xx-large;
+        }
+
+        .step:not(.begin) {
+            display: none;
+        }
+
+        span.wrong-password {
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+
+        div.picture {
+            text-align: left;
+            width: 25%;
+            float: left;
+        }
+
+        div.text {
+            width: 73%;
+            padding: 0 1%;
+            float: left;
+        }
+
+        div.picture img {
+            width: 80%;
+            margin: 1em;
+        }
+
+        #failure, #success {
+            padding: 3em;
+        }
+
+        p.hint {
+            text-align: center;
+        }
+
+        b {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+<div id="timer"></div>
+<div id="dummbaba" class="begin step">
+    <div class="picture">
+        <img src="img/dummbaba1.png" width="100%">
+    </div>
+    <div class="text">
+        <p>
+            "Hallo zusammen, hier spricht <b>Professor Dummbaba</b>! Noch kennt ihr mich nicht, aber ich bin der böse
+            Zwillingsbruder von Amélies Papa. Viele Grüße aus meinem coolen Raumschiff!
+        </p>
+        <p>
+            Momentan bin ich total sauer!! Amélie, warum hast du mich nicht zu deinem Geburtstag eingeladen?!"
+        </p>
+        <button class="abort" onclick="transition('dummbaba', 'dummbaba_igel')">Weil ich einlade wen ich will?</button>
+        <button class="proceed" onclick="transition('dummbaba', 'dummbaba_igel')">Weil du total dummbaba bist?</button>
+    </div>
+</div>
+<div id="dummbaba_igel" class="step">
+    <div class="picture">
+        <img src="img/dummbaba2.png" width="100%">
+    </div>
+    <div class="text"><p>
+        "Naja, halb so wild", sagt Professor Dummbaba.</p>
+        <p>"Aber damit du mich vielleicht nächstes Jahr einlädst, muss ich dir eine kleine Lektion
+            erteilen. Und zwar habe ich deinen <b>kleinen Igel</b> entführt, und eingesperrt! HAHAHAHAHA!
+        </p>
+        <p>
+            Wetten dass ihr es nicht schafft, den Igel zu finden und zu befreien?"
+        </p>
+        <button class="proceed" onclick="transition('dummbaba_igel', 'igeldetektorsystem_login')">Wir schaffen das,
+            Dummbaba!
+        </button>
+        <button class="abort" onclick="transition('dummbaba_igel', 'ende', false)">Nein wir sind zu doof und geben auf!
+        </button>
+    </div>
+</div>
+<div id="igeldetektorsystem_login" class="step">
+    <div class="picture">
+        <img src="img/dummbaba3.png" width="100%">
+    </div>
+    <div class="text"><p>
+        "Hahaha! Ihr werdet es nie schaffen. Aber ich habe Spaß daran, euch scheitern zu sehen!
+    </p>
+        <p>
+            Es gibt übrigens ein <b>Igeldetektorsystem</b>, mit dem man den Igel finden könnte. Das Passwort
+            ist aber streng geheim! Ich habe es irgendwo aufgeschrieben, den Zettel findet ihr aber niemals!
+        </p>
+        <p>
+            <input
+                    id="passwort_igeldetektorsystem"
+                    type="text"
+                    maxlength="6"
+                    placeholder="******"
+                    onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                    onkeyup="this.value = this.value.toUpperCase()"
+            >
+            <button onclick="login_igeldetektorsystem()">Einloggen</button>
+        </p>
+        <p>
+        <span id="passwort_igeldetektorsystem_falsch"
+              class="wrong-password">Das ist leider das falsche Passwort...</span>
+        </p>
+        <p>
+            Aus Mitleid ein kleiner Hinweis: versucht doch mal, dieses Wort zu entschlüsseln
+        </p>
+        <p class="hint">
+            <b>WPSIBOH</b>
+        </p>
+        <p>Zum Entschlüsseln müsst ihr nur einen Schritt nach links "gehen". Danach findet ihr weitere Hinweise. Aber ich will ja nicht zu viel verraten...HAHAHA!
+        </p>
+        <p>
+            Solltet ihr das Passwort für das Igeldetektorsystem gefunden haben, gebt es oben ein. Ich muss mir in der
+            Zwischenzeit neue Bosheiten überlegen, bis bald..."
+        </p>
+
+    </div>
+</div>
+<div id="igeldetektorsystem" class="step">
+    <div class="picture">
+        <img src="img/igeldetektor.jpg" width="100%">
+    </div>
+    <div class="text"><p>
+        Ihr seid eingeloggt!
+    </p>
+        <p>
+            Ihr könnt nun nach dem Igel suchen lassen. Drückt einfach auf den Knopf.
+        </p>
+        <p>
+            <button onclick="transition('igeldetektorsystem', 'igeldetektorsystem_deactivated')">Igel suchen</button>
+        </p>
+    </div>
+</div>
+<div id="igeldetektorsystem_deactivated" class="step">
+    <div class="picture">
+        <img src="img/phone.jpg" width="100%">
+    </div>
+    <div class="text"><p>
+        Schade! Professor Dummbaba hat die Igelsuche gesperrt. So doof ist er ja auch nicht.
+    </p>
+        <p>
+            Man kann die Igelsuche aber wieder aktivieren, wenn man den <b>Entsperrcode</b> kennt.
+        </p>
+        <p>
+            <input
+                    id="entsperrcode_igeldetektorsystem"
+                    type="text"
+                    maxlength="6"
+                    placeholder="******"
+                    onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                    onkeyup="this.value = this.value.toUpperCase()"
+            >
+            <button onclick="activate_igeldetektorsystem()">Entsperren</button>
+        </p>
+        <p>
+            <span id="entsperrcode_igeldetektorsystem_falsch" class="wrong-password">Das ist leider nicht der richtige Code...</span>
+        </p>
+        <p>
+            Dazu müsst ihr Professor Dummbabas Robotersekretärin in Bonn anrufen. Aber ihre Nummer ist geheim! Um sie
+            herauszufinden, müsst ihr folgende Rechenaufgabe lösen:
+        </p>
+        <p class="hint">
+            <b>669.898.017.895 - 646.999.873.968</b>
+        </p>
+        <p>
+            Dann könnt ihr sie mit dem Telefon im Wohnzimmer anrufen.
+        </p>
+    </div>
+</div>
+<div id="igeldetektorsystem_aktiv" class="step">
+    <div class="picture">
+        <img src="img/igeldetektor.jpg" width="100%">
+    </div>
+    <div class="text"><p>
+        Die Suche ist wieder aktiv!
+    </p>
+        <p>
+            Ihr könnt nun nach dem Igel suchen lassen. Drückt einfach auf den Knopf.
+        </p>
+        <p>
+            <button onclick="trigger_alarm()">Igel suchen</button>
+        </p>
+    </div>
+</div>
+<div id="igeldetektorsystem_alarm" class="step">
+    <div class="picture">
+        <img src="img/scanner.jpg" width="100%">
+    </div>
+    <div class="text"><p>
+        Die gute Nachricht zuerst: Der Igel ist im Keller und es geht ihm gut.
+    </p>
+        <p>
+            Die schlechte Nachricht: Leider ist eure Suche nicht unbemerkt geblieben, und ein Alarm geht los! Ihr habt
+            <b>20 Minuten</b> Zeit bevor Professor Dummbaba alarmiert wird. Dann wäre der Igel verloren!
+        </p>
+        <p>
+            Ihr könnt den Alarm aber mit einem <b>Abschaltcode</b> deaktivieren. Hinweise findet ihr auf einem Blatt
+            Papier
+            im <b>Scanner</b> am Drucker. Beeilt euch! Gebt den Abschaltcode dann hier ein:
+        </p>
+        <p>
+            <input
+                    id="abschaltcode_igeldetektorsystem"
+                    type="text"
+                    maxlength="4"
+                    placeholder="****"
+                    onkeypress="return (event.charCode > 47 && event.charCode < 58)"
+            >
+            <button onclick="turn_off_alarm_igeldetektorsystem()">Alarm abschalten</button>
+        </p>
+        <p>
+            <span id="abschaltcode_igeldetektorsystem_falsch" class="wrong-password">Das ist leider nicht der richtige Abschaltcode...</span>
+        </p>
+    </div>
+</div>
+<div id="bewegungsmelder_keller_aktiv" class="step">
+    <div class="picture">
+        <img src="img/dose.jpg" width="100%">
+    </div>
+    <div class="text"><p>
+        Der Alarm ist abgeschaltet, und Professor Dummbaba hat nichts gemerkt. Puh!
+    </p>
+        <p>
+            Bevor ihr in den Keller geht, müsst ihr zuerst den <b>Bewegungsmelder</b> deaktivieren. Mit dem
+            Bewegungsmelder
+            kann Professor Dummbaba erkennen, dass gerade jemand im Keller ist, und wer weiß was dann passiert!
+        </p>
+        <p>
+            Ihr könnt den Bewegungsmelder aber mit einem <b>Geheimcode</b> deaktivieren. <b>Das Versteck seht ihr im
+            Bild!</b>
+        </p>
+        <p>
+            Gebt den Geheimcode dann hier ein:
+        </p>
+        <p>
+            <input
+                    id="geheimcode_bewegungsmelder"
+                    type="text"
+                    maxlength="6"
+                    placeholder="******"
+                    onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                    onkeyup="this.value = this.value.toUpperCase()"
+            >
+            <button onclick="turn_off_bewegungsmelder()">Bewegungsmelder abschalten</button>
+        </p>
+        <p>
+            <span id="geheimcode_bewegungsmelder_falsch" class="wrong-password">Das ist leider nicht der richtige Geheimcode...</span>
+        </p>
+    </div>
+</div>
+<div id="bewegungsmelder_keller_inaktiv" class="step">
+    <div class="picture">
+        <img src="img/schluessel.jpg" width="100%">
+    </div>
+    <div class="text"><p>
+        Jetzt müsst ihr den Kellerschlüssel finden! Professor Dummbaba hat ihn im Hinterhof versteckt. Dann könnt ihr
+        den Igel befreien!
+    </p>
+        <p>
+            <b>WICHTIG:</b> wenn ihr zurückkommt, müsst ihr den Bewegungsmelder wieder aktivieren, damit Professor
+            Dummbaba
+            keinen Verdacht schöpft. Dazu findet ihr im Keller einen weiteren <b>Geheimcode</b>! Beeilt euch, ihr habt
+            nur
+            15 Minuten Zeit.
+        </p>
+        <p>
+            <input
+                    id="zweiter_geheimcode_bewegungsmelder"
+                    type="text"
+                    maxlength="6"
+                    placeholder="******"
+                    onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                    onkeyup="this.value = this.value.toUpperCase()"
+            >
+            <button onclick="turn_on_bewegungsmelder()">Bewegungsmelder einschalten</button>
+        </p>
+        <p>
+            <span id="zweiter_geheimcode_bewegungsmelder_falsch" class="wrong-password">Das ist leider nicht der richtige Geheimcode...</span>
+        </p>
+    </div>
+</div>
+<div id="bombe_scharf" class="step">
+    <div class="picture">
+        <img src="img/bombe.jpg" width="100%">
+    </div>
+    <div class="text"><p>
+        Ihr müsst jetzt schleunigst die Bombe entschärfen! Geht dazu in Professor Dummbabas Bombenentschärfungssystem.
+    </p>
+        <p>
+            <button class="abort" onclick="transition('bombe_scharf', 'bombe_serialnumber')">Bombenentschärfungssystem
+            </button>
+        </p>
+    </div>
+</div>
+<div id="bombe_serialnumber" class="step">
+    <div class="picture">
+        <img src="img/bombe.jpg" width="100%">
+    </div>
+    <div class="text">
+        <p>
+            Professor Dummbaba hat leider dutzende Bomben gebaut, mit denen er Unschuldige terrorisiert. Bevor ihr die
+            Bombe entschärft müsst ihr die Seriennummer hier eingeben, um die Bombe zu identifizieren.
+        </p>
+        <p>
+            <input
+                    id="bombe_erkennen"
+                    type="text"
+                    maxlength="6"
+                    placeholder="******"
+                    onkeypress="return (event.charCode > 47 && event.charCode < 58)"
+            >
+            <button onclick="bombe_erkennen()">Bombe identifizieren</button>
+        </p>
+        <p>
+            <span id="bombe_erkennen_falsch" class="wrong-password">Unbekannte Seriennummer.</span>
+        </p>
+    </div>
+</div>
+<div id="bombe_loggedin" class="step">
+    <div class="picture">
+        <img src="img/dummbaba3.png" width="100%">
+    </div>
+    <div class="text">
+        <p>
+            Ihr müsst den Code zum Entschärfen der Bombe eingeben! Dafür habt ihr <b>20 Minuten</b> Zeit!
+        </p>
+        <p>
+            <input
+                    id="bombe_entschaerfen"
+                    type="text"
+                    maxlength="6"
+                    placeholder="******"
+                    onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                    onkeyup="this.value = this.value.toUpperCase()"
+            >
+            <button onclick="bombe_entschaerfen()">Bombe abschalten</button>
+        </p>
+        <p>
+            <span id="bombe_entschaerfen_falsch" class="wrong-password">Das ist leider nicht der richtige Entschärfcode...</span>
+        </p>
+        <p>
+            Da meldet sich auch Professor Dummbaba wieder! Er lacht, "Hahaha! Leider werdet ihr den Code NIEMALS finden!
+            Ich habe ihn auf dem Handy von Amélies Papa versteckt. Ich habe aber die PIN des Handys geändert!! Sucht ihr
+            mal schön im Wohnzimmer nach der PIN, während ich mich entspannt in meine weichen Sofakissen zurücklehne!"
+        </p>
+    </div>
+</div>
+<div id="igel_finden" class="step">
+    <div class="picture">
+        <img src="img/dummbaba4.png" width="100%">
+        <img src="img/igel_versteck.jpg" width="100%">
+    </div>
+    <div class="text">
+        <p>
+            Die Bombe ist entschärft! Puh...
+        </p>
+        <p>
+            Professor Dummbaba ist außer sich. "Woher kennt ihr nur alle meine Geheimcodes?!?! Aber den Igel habt ihr
+            immer noch nicht gefunden. Und ich werde euch bestimmt nicht zeigen, wo er ist!
+        </p>
+        <p>
+            Ups.
+        </p>
+        <p>
+            Aber immerhin könnt ihr meinen Supercomputer nicht deaktivieren, denn niemand kennt das Masterpasswort
+            dafür!!"
+        </p>
+        <p>
+            Solltet ihr das Passwort trotzdem herausfinden, könnt ihr es hier eingeben, um Professor Dummbaba ein für
+            alle mal unschädlich zu machen.
+        </p>
+        <p>
+            <input
+                    id="computer_deaktivieren"
+                    type="text"
+                    maxlength="6"
+                    placeholder="******"
+                    onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                    onkeyup="this.value = this.value.toUpperCase()"
+            >
+            <button onclick="computer_deaktivieren()">Supercomputer deaktivieren</button>
+        </p>
+        <p>
+            <span id="computer_deaktivieren_falsch" class="wrong-password">Das ist leider nicht das richtige Masterpasswort...</span>
+        </p>
+        <p>
+            <span id="computer_deaktivieren_fast_richtig" class="wrong-password">Du warst nah dran! Manchmal muss man ein Problem aus einer anderen Richtung betrachten...</span>
+        </p>
+    </div>
+</div>
+<div id="igel_gefunden" class="step">
+    <div class="picture">
+        <img src="img/dummbaba5.png" width="100%">
+    </div>
+    <div class="text">
+        <p>
+            Ihr habt den Igel gerettet!
+        </p>
+        <p>
+            Und Professor Dummbaba hat ohne seinen Supercomputer keine Chance, weiteres Chaos anzurichten. Doch während
+            er sich schon neue Pläne ausdenkt, flucht er ein letztes Mal.
+        </p>
+        <p>
+            "Ihr dämlichen Gören! Freut euch mal nicht zu
+            früh! Ich komme ZURÜCK!!!!"
+        </p>
+        <p>
+            Aber fürs erste ist die Gefahr gebannt. Feiert noch schön!!
+        </p>
+    </div>
+</div>
+<div id="ende" class="step">
+    <div class="picture">
+        <img src="img/igel.jpg" width="100%">
+    </div>
+    <div class="text">
+        <p>
+            Der Igel ist traurig dass ihr ihn nicht befreien konntet! Nun muss er sein Leben in Gefangenschaft beim bösen Professor Dummbaba verbringen.
+        </p>
+        <p>
+            Wollt ihr es vielleicht nochmal versuchen? Seht doch mal in seine süßen kleinen Äuglein!
+        </p>
+        <p>
+            <button class="proceed" onclick="transition('ende', 'igeldetektorsystem_login')">Wir retten dich, kleiner Igel!</button>
+        </p>
+    </div>
+</div>
+<div id="success" class="step">
+    Ihr habt das Rätsel gelöst!
+</div>
+<div id="failure" class="step">
+    Oh nein!
+</div>
+<script>
+    var noPW = false
+    var normalTimeLimits = true
+    var superComputerPowerDownXWHZON = false
+    var superComputerPowerDownNOZHMX = false
+
+    function login_igeldetektorsystem() {
+        var passwort = document.getElementById("passwort_igeldetektorsystem").value
+        var wrong_password_hint = document.getElementById("passwort_igeldetektorsystem_falsch")
+        if (noPW || passwort && passwort.toUpperCase() === "AQLWRX") {
+            wrong_password_hint.style.display = "none"
+            transition("igeldetektorsystem_login", "igeldetektorsystem", true)
+        } else {
+            wrong_password_hint.style.display = "block"
+        }
+    }
+
+    function activate_igeldetektorsystem() {
+        var passwort = document.getElementById("entsperrcode_igeldetektorsystem").value
+        var wrong_password_hint = document.getElementById("entsperrcode_igeldetektorsystem_falsch")
+        if (noPW || passwort && passwort.toUpperCase() === "KDZVRT") {
+            wrong_password_hint.style.display = "none"
+            transition("igeldetektorsystem_deactivated", "igeldetektorsystem_aktiv", true)
+        } else {
+            wrong_password_hint.style.display = "block"
+        }
+    }
+
+    function trigger_alarm() {
+        transition('igeldetektorsystem_aktiv', 'igeldetektorsystem_alarm', undefined, function () {
+            showTimer()
+            startTimer(normalTimeLimits ? 1200 : 5, function () {
+                stopTimer()
+                hideTimer()
+                transition("igeldetektorsystem_alarm", "ende", false)
+            })
+        })
+
+    }
+
+    function turn_off_alarm_igeldetektorsystem() {
+        var passwort = document.getElementById("abschaltcode_igeldetektorsystem").value
+        var wrong_password_hint = document.getElementById("abschaltcode_igeldetektorsystem_falsch")
+        if (noPW || passwort && (passwort === "4761" || passwort === "4762")) {
+            wrong_password_hint.style.display = "none"
+            stopTimer()
+            hideTimer()
+            transition("igeldetektorsystem_alarm", "bewegungsmelder_keller_aktiv", true)
+        } else {
+            wrong_password_hint.style.display = "block"
+        }
+    }
+
+    function turn_off_bewegungsmelder() {
+        var passwort = document.getElementById("geheimcode_bewegungsmelder").value
+        var wrong_password_hint = document.getElementById("geheimcode_bewegungsmelder_falsch")
+        if (noPW || passwort && passwort.toUpperCase() === "AAZQLA") {
+            wrong_password_hint.style.display = "none"
+            transition("bewegungsmelder_keller_aktiv", "bewegungsmelder_keller_inaktiv", true, function () {
+                showTimer()
+                startTimer(normalTimeLimits ? 900 : 5, function () {
+                    stopTimer()
+                    hideTimer()
+                    transition("bewegungsmelder_keller_inaktiv", "ende", false)
+                })
+            })
+        } else {
+            wrong_password_hint.style.display = "block"
+        }
+    }
+
+    function turn_on_bewegungsmelder() {
+        var passwort = document.getElementById("zweiter_geheimcode_bewegungsmelder").value
+        var wrong_password_hint = document.getElementById("zweiter_geheimcode_bewegungsmelder_falsch")
+        if (noPW || passwort && passwort.toUpperCase() === "RPOWLT") {
+            wrong_password_hint.style.display = "none"
+            stopTimer()
+            hideTimer()
+            transition("bewegungsmelder_keller_inaktiv", "bombe_scharf", true)
+        } else {
+            wrong_password_hint.style.display = "block"
+        }
+    }
+
+    function bombe_erkennen() {
+        var passwort = document.getElementById("bombe_erkennen").value
+        var wrong_password_hint = document.getElementById("bombe_erkennen_falsch")
+        if (noPW || passwort && passwort.toUpperCase() === "547019") {
+            wrong_password_hint.style.display = "none"
+            transition("bombe_serialnumber", "bombe_loggedin", true, function () {
+                showTimer()
+                startTimer(normalTimeLimits ? 1200 : 5, function () {
+                    stopTimer()
+                    hideTimer()
+                    transition("bombe_loggedin", "ende", false)
+                })
+            })
+        } else {
+            wrong_password_hint.style.display = "block"
+        }
+    }
+
+    function bombe_entschaerfen() {
+        var passwort = document.getElementById("bombe_entschaerfen").value
+        var wrong_password_hint = document.getElementById("bombe_entschaerfen_falsch")
+        if (noPW || passwort && passwort.toUpperCase() === "VYXQUA") {
+            wrong_password_hint.style.display = "none"
+            stopTimer()
+            hideTimer()
+            transition("bombe_loggedin", "igel_finden", true)
+        } else {
+            wrong_password_hint.style.display = "block"
+        }
+    }
+
+    function computer_deaktivieren() {
+        var passwort = document.getElementById("computer_deaktivieren").value
+        var wrong_password_hint = document.getElementById("computer_deaktivieren_falsch")
+        var almost_correct_password_hint = document.getElementById("computer_deaktivieren_fast_richtig")
+        if(noPW || passwort && passwort.toUpperCase() === "XWHZON") {
+            superComputerPowerDownXWHZON = true
+        }
+        if(noPW || passwort && passwort.toUpperCase() === "NOZHMX") {
+            superComputerPowerDownNOZHMX = true
+        }
+        if (superComputerPowerDownNOZHMX && superComputerPowerDownXWHZON) {
+            wrong_password_hint.style.display = "none"
+            almost_correct_password_hint.style.display = "none"
+            transition("igel_finden", "igel_gefunden", true)
+        } else if(superComputerPowerDownNOZHMX && !superComputerPowerDownXWHZON || !superComputerPowerDownNOZHMX && superComputerPowerDownXWHZON) {
+            almost_correct_password_hint.style.display = "block"
+            wrong_password_hint.style.display = "none"
+        }
+        else {
+            almost_correct_password_hint.style.display = "none"
+            wrong_password_hint.style.display = "block"
+
+        }
+    }
+
+    function transition(source, target, success, callback) {
+        document.getElementById(source).style.display = "none"
+        if (success === true) {
+            showSuccess()
+            setTimeout(function () {
+                hideSuccess()
+                document.getElementById(target).style.display = "block"
+                callback && callback()
+            }, 2000)
+        } else if (success === false) {
+            showFailure()
+            setTimeout(function () {
+                hidefailure()
+                document.getElementById(target).style.display = "block"
+                callback && callback()
+            }, 2000)
+        } else {
+            setTimeout(function () {
+                document.getElementById(target).style.display = "block"
+                callback && callback()
+            }, 500)
+        }
+    }
+
+    function hideTimer() {
+        document.getElementById("timer").style.visibility = "hidden"
+    }
+
+    function showTimer() {
+        document.getElementById("timer").style.visibility = "visible"
+    }
+
+    function showFailure() {
+        document.getElementsByTagName("body")[0].style.backgroundColor = "red"
+        document.getElementById("failure").style.display = "block"
+    }
+
+    function hidefailure() {
+        document.getElementById("failure").style.display = "none"
+        document.getElementsByTagName("body")[0].style.backgroundColor = "white"
+    }
+
+    function showSuccess() {
+        document.getElementsByTagName("body")[0].style.backgroundColor = "green"
+        document.getElementById("success").style.display = "block"
+    }
+
+    function hideSuccess() {
+        document.getElementById("success").style.display = "none"
+        document.getElementsByTagName("body")[0].style.backgroundColor = "white"
+    }
+</script>
+<script src="clock.js"></script>
+
+</body>
