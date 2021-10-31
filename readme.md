@@ -1,6 +1,6 @@
 # Escape Room
 
-Anläßlich des Geburtstags meiner Tochter.
+Anläßlich des Geburtstags meiner Tochter. Die Teilnehmer sind 12/13 Jahre alt.
 
 Man startet den Escape Room, indem man die statische Webseite im Browser öffnet. Durch Eingabe von Passwörter und Geheimcodes können die Teilnehmer:innen selbst durch das Spiel navigieren.
 
