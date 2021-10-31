@@ -26,7 +26,7 @@ Der böse Professor Dummbaba hat ein Igel-Plüschtier entführt, weil er nicht z
 
 - Die Igelsuche ist deaktiviert, man muss einen Entsperrcode finden
 - Rechenaufgabe 669898017895 - 646999873968 => 22898143927 (Hinweis: ist eine Bonner Nummer, man muss darauf kommen die führende Null mitzuwählen)
-- Die Nummer ist eine unserer Telefonnummern, die ich in der Fritzbox mit einer Anrufbeantworteransage (Text to speech als mp3) hinterlegt habe
+- Die Nummer ist eine unserer Telefonnummern, die ich in der Fritzbox mit einer Anrufbeantworteransage (Text to speech als mp3, https://ttsfree.com/text-to-speech/german) hinterlegt habe
 - Die gewählte Nummer ist die "falsche" (Hinweis: die richtige Nummer ist in einem Luftballon versteckt, die außer Reichweite aufgehängt sind)
 - Man muss die Luftballons erreichen und zum Platzen bringen, darin finden sich verschiedene Zettel mit Telefonnummern. Davon ist nur eine richtig, die falschen Fährten sind die Festnetztelefonnummern der Eltern der Teilnehmer:innen. Im Idealfall kann man die ausschließen.
 - Die richtige Nummer (ebenso in der Fritzbox mit Ansage versehen) verrät den Entsperrcode
